@@ -1,12 +1,14 @@
 package com.java.blogposts.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
+@Table(name = "post")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -16,7 +18,14 @@ public class Post {
     private String metaTitle;
     private String slug;
     private String summary;
-    private String published;
+    private int published;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private LocalDateTime publishedAt;
+    private  String content;
 
+    @ManyToMany
+    @JoinTable(name="post_category",joinColumns = @JoinColumn(name = "postId"), inverseJoinColumns = @JoinColumn(name = "categoryId"))
+    private Set<Category> categories = new HashSet<>();
 
 }

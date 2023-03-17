@@ -1,4 +1,4 @@
-package com.java.blogposts.Repository;
+package com.java.blogposts.repository;
 
 import com.java.blogposts.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
