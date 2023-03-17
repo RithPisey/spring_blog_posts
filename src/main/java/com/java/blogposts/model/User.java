@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class User extends BaseEntity  {
+public class User  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name="native", strategy = "native")
@@ -26,7 +26,7 @@ public class User extends BaseEntity  {
     private String email;
     private String passwordHash;
     @CreatedDate
-    @Column(updatable = false)
+    @Column(updatable = false, name = "registeredAt")
     private LocalDateTime registeredAt;
     private LocalDateTime lastLogin;
     private String intro;
