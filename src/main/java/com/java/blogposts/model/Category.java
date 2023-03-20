@@ -1,6 +1,9 @@
 package com.java.blogposts.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.apachecommons.CommonsLog;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -8,6 +11,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@Table(name = "category")
 public class Category {
 
     @Id
@@ -26,6 +32,8 @@ public class Category {
     @Column(name="content")
     String content;
 
+
     @ManyToMany(mappedBy = "categories")
-    Set<Post> posts = new HashSet<>();
+    @JsonIgnore
+    Set<Post> posts;
 }

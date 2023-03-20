@@ -6,13 +6,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Objects;
 
+
+@Embeddable
 @Getter
 @Setter
-@Embeddable
 public class PostCategoryKey implements Serializable {
     @Column(name = "postId")
     Long postId;
     @Column(name = "categoryId")
     Long categoryId;
+
+
 }

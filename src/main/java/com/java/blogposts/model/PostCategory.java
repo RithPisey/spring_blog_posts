@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity()
-
+@Getter
+@Setter
 @Table(name = "post_category")
 public class PostCategory {
 
@@ -16,11 +17,11 @@ public class PostCategory {
 
     @ManyToOne
     @MapsId("postId")
-    @JoinColumn(name="postId")
+//    @JoinColumn(name="postId")
     private Post post;
 
     @ManyToOne
     @MapsId("categoryId")
-    @JoinColumn(name="categoryId")
+//    @JoinColumn(name="categoryId")
     private Category category;
 }
