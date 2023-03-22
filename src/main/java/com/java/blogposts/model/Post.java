@@ -1,5 +1,6 @@
 package com.java.blogposts.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,8 +39,16 @@ public class Post {
     @Column(name = "content")
     private  String content;
 
+
+    @ManyToOne
+    @JoinColumn(name="authorId")
+    @JsonIgnore
+    private User author;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="post_category",joinColumns = @JoinColumn(name = "postId"), inverseJoinColumns = @JoinColumn(name = "categoryId"))
     private Set<Category> categories;
 
+    @OneToOne(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private PostMeta postMeta;
 }
