@@ -19,15 +19,13 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Builder
 @Table(name = "user")
 @EntityListeners(AuditingEntityListener.class)
-public class User implements UserDetails {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name="native", strategy = "native")
     private int id;
-
     @Column(name = "firstName")
     private String firstName;
     @Column(name = "middleName")
@@ -48,46 +46,7 @@ public class User implements UserDetails {
     private LocalDateTime lastLogin;
     private String intro;
     private String profile;
-
-    @Enumerated(EnumType.STRING)
-    private Role role;
-
     @OneToMany(mappedBy = "author")
     private Set<Post> posts;
 
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return email;
-    }
-
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
