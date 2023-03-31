@@ -1,5 +1,6 @@
 package com.java.blogposts.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,5 +49,18 @@ public class User {
     private String profile;
     @OneToMany(mappedBy = "author")
     private Set<Post> posts;
+
+    @ManyToOne
+    @JoinColumn(name="role_id")
+    private Role role;
+
+
+//    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+//    @JoinTable(name="user_role", joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name="role_id"))
+//    private Set<Role> roles;
+
+
+
+
 
 }

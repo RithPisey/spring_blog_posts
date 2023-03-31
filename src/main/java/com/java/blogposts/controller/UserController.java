@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,4 +27,14 @@ public class UserController {
         return userRepository.findById(id);
     }
 
+    @RequestMapping("/user")
+    public User getUserDetailsAfterLogin(Principal user) {
+        Optional<User> users = userRepository.findByEmail(user.getName());
+        if (users.isPresent()) {
+            return users.get();
+        }else {
+            return null;
+        }
+
+    }
 }
