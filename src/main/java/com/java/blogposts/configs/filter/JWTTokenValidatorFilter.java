@@ -28,7 +28,8 @@ public class JWTTokenValidatorFilter extends OncePerRequestFilter
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-             String jwt = request.getHeader(SecurityConstants.JWT_HEADER);
+            String bearer =request.getHeader(SecurityConstants.JWT_HEADER);
+             String jwt = bearer.substring(bearer.indexOf(" ")+1);
         LOG.info(jwt + " <<< in jwt validator");
              if(null != jwt){
                  try{

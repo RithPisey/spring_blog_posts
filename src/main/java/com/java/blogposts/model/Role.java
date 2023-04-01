@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -17,11 +19,10 @@ public class Role {
     @GenericGenerator(name="native", strategy = "native")
     int id;
 
-    @ManyToOne
     @Column(name = "role")
     String role;
 
     @OneToMany(mappedBy = "role")
     @JsonIgnore
-    User user;
+    Set<User> user;
 }
